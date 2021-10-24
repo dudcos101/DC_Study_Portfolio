@@ -9,6 +9,7 @@
   --color-dark-blue: #4bacb8;
   --color-light-blue: #b4ffff;
   --color-bright-blue: #e0f7fa;
+  --color-light-white: #f0f0f0;
 
   --color-yellow: #fff7d1;
   --color-orange: #feb546;
@@ -68,7 +69,7 @@ h1 {
   margin: 16px 0px;
 }
 h2 {
-  font-size: var(--font-regular);
+  font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
   color: var(--color-black);
   margin: 8px 0px;
@@ -99,6 +100,7 @@ p {
   padding: 10px 10px;
 }
 .navbar__logo {
+  margin: 20px;
   font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
 }
@@ -373,4 +375,84 @@ p {
   margin-left: -12px;
   margin-top: 8px;
   background-color: var(--color-white);
+}
+
+/* Testimonial */
+#testimonials {
+  background-color: var(--color-light-white);
+  margin: 40px;
+}
+
+.testimonials {
+  margin: 40px;
+}
+
+.testimonial {
+  display: flex;
+  margin: 32px 0;
+}
+
+.testimonial__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.testimonial__avatar:nth-child(odd) {
+  margin-right: 40px;
+}
+.testimonial__avatar:nth-child(even) {
+  margin-left: 40px;
+}
+
+.testimonial__speech-bubble {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px;
+  background-color: var(--color-white);
+  border-radius: var(--size-border-radius);
+}
+
+.testimonial__speech-bubble p {
+  color: var(--color--gray);
+}
+
+.testimonial__speech-bubble a {
+  color: var(--color-dark-blue);
+}
+
+.testimonial__speech-bubble p.name {
+  font-size: var(--font-micro);
+}
+
+/* Contact */
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-blue);
+}
+
+.contact__title,
+.contact__email,
+.contact__rights {
+  color: var(--color-white);
+}
+
+.contact__title {
+  margin: 32px 0;
+}
+
+.contact__links {
+  font-size: var(--font-large);
+  margin: 24px 0;
+  transition: all var(calc(5 * --animation-duration)) ease-in;
+}
+
+.contact__links i:hover {
+  transform: scale(1.1);
+  color: var(--color-dark-blue);
 }
