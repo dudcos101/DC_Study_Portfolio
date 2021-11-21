@@ -18,6 +18,7 @@
   /* Font Size */
   --font-large: 48px;
   --font-medium: 28px;
+  --font-small-medium: 22px;
   --font-regular: 18px;
   --font-small: 16px;
   --font-micro: 14px;
@@ -375,7 +376,7 @@ p {
   width: 250px;
   height: 200px;
   margin: 2px;
-  background-color: var(--color-white);
+  background-color: var(--color-light-white);
   position: relative;
   display: flex;
   justify-content: center;
@@ -413,17 +414,19 @@ p {
 }
 
 .project__description h3 {
-  color: var(--color-white);
+  font-size: var(--font-small-medium);
+  color: var(--color-orange);
 }
 .project__description h3:after {
   content: "";
   display: block;
   position: relative;
   left: 50%;
-  width: 25px;
-  height: 2px;
-  margin-left: -12px;
+  width: 70px;
+  height: 1px;
+  transform: translateX(-50%);
   margin-top: 8px;
+  margin-bottom: 8px;
   background-color: var(--color-white);
 }
 
@@ -541,6 +544,8 @@ p {
   #navbar {
     flex-direction: column;
     align-items: flex-start;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);  
   }
 
   .navbar__menu {
@@ -548,6 +553,14 @@ p {
     text-align: center;
     width: 100%;
     display: none;
+  }
+
+  .navbar__menu.open {
+    display: block;
+  }
+
+  .navbar__logo a {
+    color: var(--color-white);
   }
 
   .about__majors {
