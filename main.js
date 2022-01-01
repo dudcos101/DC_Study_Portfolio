@@ -25,7 +25,9 @@ navbarMenu.addEventListener('click', (event) => {
         return;
     navbarMenu.classList.remove('open');
     scrollIntoView(link);
-})
+    console.log(link);
+    console.log(navItems[0]);
+});
 
 
 // Navbar toggle button for small screen
@@ -36,8 +38,8 @@ navbarToggleBtn.addEventListener('click', () => {
 
 
 // Handle click on "contact me" button on home
-const hmoeContactBtn = document.querySelector('.home__contact');
-hmoeContactBtn.addEventListener('click', () => {
+const homeContactBtn = document.querySelector('.home__contact');
+homeContactBtn.addEventListener('click', () => {
     scrollIntoView('#contact');
 })
 
@@ -101,9 +103,66 @@ workBtnContainer.addEventListener('click', (e) => {
 });
 
 
+// 1. Collect every section, menu item materials.
+// 2. Observe every sections using "InntersectionObserver"
+// 3. Activate target menu item according to the section that is shown
 
+const sectionIds = [
+    '#home',
+    '#about',
+    '#skills',
+    '#work',
+    '#testimonials',
+    '#contact',
+];
+
+const sections = sectionIds.map(id => document.querySelector(id));
+const navItems = sectionIds.map(id =>
+    document.querySelector(`[data-link="${id}"]`)
+    );
+
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+function selectNavItem(selected) {
+    selectedNavItem.classList.remove('active');
+    selectedNavItem = selected;
+    selectedNavItem.classList.add('active');
+};
+
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+            const index = sectionIds.indexOf(`#${entry.target.id}`);
+            // Page is ascending for scroll downn
+            if (entry.boundingClientRect.y < 0) {
+                selectedNavIndex = index + 1;
+            } else {
+                selectedNavIndex = index - 1;
+            }
+        }
+    });
+};
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+sections.forEach(section => observer.observe(section));
+
+window.addEventListener('wheel', () => {
+    if (window.scrollY === 0) {
+        selectedNavIndex = 0;
+    } else if (    Math.round(window.scrollY + window.innerHeight) >= document.body.clientHeight) {
+        selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavIndex]);
+});
 
 function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({behavior: 'smooth'});
+    selectNavItem(navItems[sectionIds.indexOf(selector)]);
 }
